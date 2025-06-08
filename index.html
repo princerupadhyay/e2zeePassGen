@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecurePassGen - Custom Password Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f6f8fa;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      nav {
+        background: #254185;
+        padding: 1em 0;
+      }
+      .nav-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1em;
+      }
+      .site-title {
+        color: #fff;
+        font-size: 1.3em;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .nav-links a {
+        color: #fff;
+        margin-left: 1.3em;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+      }
+      .nav-links a:hover {
+        opacity: 0.7;
+      }
+      @media (max-width: 560px) {
+        .nav-content {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .site-title {
+          margin-bottom: 0.7em;
+        }
+        .nav-links a {
+          margin-left: 0;
+          margin-right: 1em;
+        }
+      }
+      .container {
+        max-width: 600px;
+        margin: 1em 1em;
+        background: #fff;
+        padding: 2em;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px #0002;
+      }
+      label {
+        display: block;
+        margin: 1em 0 0.2em 0;
+        font-weight: bold;
+      }
+      input,
+      select {
+        width: 97%;
+        padding: 0.6em;
+        margin-bottom: 0.6em;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      #password {
+        width: 100%;
+        padding: 0.6em;
+        font-size: 1.2em;
+        margin: 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+      }
+      .row button {
+        margin-left: 0.5em;
+        height: 2.9em;
+      }
+      .row_btn {
+        display: flex;
+        gap: 0.25px;
+      }
+      .feedback {
+        font-size: 1em;
+        margin-bottom: 1em;
+        font-weight: bolder;
+        display: none;
+      }
+      .strength-bar {
+        height: 10px;
+        border-radius: 4px;
+        width: 100%;
+        background: #eee;
+        margin-bottom: 0.7em;
+      }
+      .strength-line {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.2s;
+      }
+      footer {
+        text-align: center;
+        background: #eee;
+        padding: 1em;
+        display: flex;
+        justify-content: space-between;
+      }
+      footer a {
+        text-decoration: none;
+        margin-right: 0.5em;
+      }
+      button {
+        padding: 0.5em 0.5em;
+        font-size: 1em;
+      }
+      .size-wrap {
+        display: flex;
+        gap: 1em;
+      }
+      .size-wrap input {
+        width: 5em;
+        margin-bottom: 0;
+      }
+      @media (max-width: 600px) {
+        .container {
+          margin: 1em 1em;
+        }
+        .size-wrap {
+          flex-direction: column;
+          gap: 0;
+        }
+        footer {
+          flex-direction: column;
+        }
+        footer div {
+          margin-bottom: 0.3em;
+        }
+        .row {
+          flex-direction: column;
+        }
+        .row_btn {
+          margin-top: 1em;
+          display: flex;
+          gap: 10px;
+        }
+        .row_btn button {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <span class="site-title">SecurePassGen</span>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+    <div style="display: flex; justify-content: center">
+      <div class="container">
+        <h1>Custom Password Generator</h1>
+        <p>
+          Create a strong, memorable password. Every click gives you a new
+          variation from your info, sized how you want.
+        </p>
+        <form
+          id="pwForm"
+          autocomplete="off"
+          onsubmit="generatePassword(); return false;"
+        >
+          <label>First Name:</label>
+          <input type="text" id="firstName" maxlength="30" />
+          <label>Last Name:</label>
+          <input type="text" id="surname" maxlength="30" />
+          <label>Date of Birth:</label>
+          <input type="date" id="dob" />
+          <label>Phone Number (optional):</label>
+          <input type="tel" id="phone" maxlength="16" />
+          <label>Lucky Number (optional):</label>
+          <input type="number" id="lucky" min="0" max="9999" />
+          <label>Secret Word (required):</label>
+          <input type="text" id="customWord" maxlength="30" required />
+          <div class="size-wrap">
+            <label
+              >Min Length:
+              <input type="number" id="minLen" min="6" max="50" value="12" />
+            </label>
+            <label
+              >Max Length:
+              <input type="number" id="maxLen" min="8" max="64" value="20" />
+            </label>
+          </div>
+          <button style="margin-top: 1em; margin-bottom: 1em" type="submit">
+            Generate Password
+          </button>
+        </form>
+        <div class="feedback" id="feedback"></div>
+        <div class="strength-bar">
+          <div class="strength-line" id="strengthLine"></div>
+        </div>
+        <div class="row">
+          <input type="text" id="password" readonly />
+          <div class="row_btn">
+            <button type="button" onclick="copyPassword()">Copy</button>
+            <button type="button" onclick="editPassword()">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div>&copy; 2024 SecurePassGen. All rights reserved.</div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+    <script>
+      function randomSymbol() {
+        const symbols = "!@#$%^&*_";
+        return symbols[Math.floor(Math.random() * symbols.length)];
+      }
+      function randomDigit() {
+        return String(Math.floor(Math.random() * 10));
+      }
+
+      function generatePassword() {
+        const fn = document.getElementById("firstName").value.trim();
+        const sn = document.getElementById("surname").value.trim();
+        const dob = document.getElementById("dob").value;
+        const phone = document.getElementById("phone").value.replace(/\D/g, "");
+        const lucky = document.getElementById("lucky").value.trim();
+        const custom = document.getElementById("customWord").value.trim();
+
+        const minLen = Math.max(
+          6,
+          parseInt(document.getElementById("minLen").value) || 12
+        );
+        const maxLen = Math.max(
+          minLen,
+          parseInt(document.getElementById("maxLen").value) || minLen + 2
+        );
+
+        if (!custom) {
+          showFeedback('Please enter the "Secret Word"', false);
+          showStrength("");
+          document.getElementById("password").value = "";
+          return;
+        }
+
+        // Prepare components, as entered
+        let year = "",
+          month = "",
+          day = "";
+        if (dob) {
+          const d = new Date(dob);
+          year = `${d.getFullYear()}`;
+          month = String(d.getMonth() + 1).padStart(2, "0");
+          day = String(d.getDate()).padStart(2, "0");
+        }
+
+        const usableParts = [
+          fn,
+          sn,
+          lucky,
+          year,
+          month,
+          day,
+          phone ? phone.slice(-4) : "",
+        ].filter(Boolean);
+
+        // Shuffle for randomness, pick a random N (at least 1) parts to use
+        let shuffled = usableParts.sort(() => Math.random() - 0.5);
+        let numParts = Math.min(
+          shuffled.length,
+          Math.max(1, Math.floor(Math.random() * shuffled.length) + 1)
+        );
+        let pickedParts = shuffled.slice(0, numParts);
+
+        // Always insert secret word at a random position
+        let idx = Math.floor(Math.random() * (pickedParts.length + 1));
+        pickedParts.splice(idx, 0, custom);
+
+        // Join with a symbol as separator (randomly)
+        let sepChance = Math.random();
+        let sep = sepChance > 0.6 ? randomSymbol() : "";
+        let base = pickedParts.join(sep);
+
+        // Optionally symbol at very start or at end to increase strength
+        if (Math.random() > 0.5) base += randomSymbol();
+        if (Math.random() > 0.7) base = randomSymbol() + base;
+
+        // Fit to desired size
+        let password = base;
+        // If too short, repeat pieces or add random digits/symbols to reach minLen
+        while (password.length < minLen) {
+          let fillers = [
+            randomDigit(),
+            randomSymbol(),
+            pickedParts[Math.floor(Math.random() * pickedParts.length)] || "",
+          ];
+          password += fillers[Math.floor(Math.random() * fillers.length)];
+        }
+        // If too long, shave off
+        if (password.length > maxLen) password = password.substring(0, maxLen);
+
+        document.getElementById("password").value = password;
+        document.getElementById("password").setAttribute("readonly", true);
+
+        showStrength(password);
+        showFeedback("Password generated! Edit or copy as you like.", true);
+      }
+
+      function showStrength(pwd) {
+        let score = 0;
+        if (pwd.length >= 12) score++;
+        if (/[A-Z]/.test(pwd) && /[a-z]/.test(pwd)) score++;
+        if (/\d/.test(pwd)) score++;
+        if (/[^A-Za-z0-9]/.test(pwd)) score++;
+        if (pwd.length >= 16) score++;
+        let width = [10, 35, 60, 80, 100][score];
+        let color = ["#bb2222", "#e67e22", "#f4d03f", "#4a90e2", "#27ae60"][
+          score
+        ];
+        let words = ["Very Weak", "Weak", "Fair", "Strong", "Excellent"][score];
+        document.getElementById("strengthLine").style.width = width + "%";
+        document.getElementById("strengthLine").style.background = color;
+
+        // Show as feedback only if password is not empty
+        const msg =
+          pwd && pwd.length > 0
+            ? "Strength: " + words + " (" + pwd.length + " chars)"
+            : "";
+        showFeedback(msg, pwd && score > 1);
+      }
+      function showFeedback(msg, ok) {
+        const el = document.getElementById("feedback");
+        el.textContent = msg;
+        el.style.color = ok ? "#27ae60" : "#c0392b";
+        // Show only if msg is not empty, else hide
+        if (msg && msg.trim() !== "") {
+          el.style.display = "block";
+        } else {
+          el.style.display = "none";
+        }
+      }
+      function editPassword() {
+        document.getElementById("password").removeAttribute("readonly");
+        document.getElementById("password").focus();
+      }
+      function onPasswordEdit() {
+        let pwd = document.getElementById("password").value;
+        showStrength(pwd);
+        showFeedback(
+          "You are editing your password. Make sure it stays strong!",
+          true
+        );
+      }
+      document
+        .getElementById("password")
+        .addEventListener("input", onPasswordEdit);
+
+      function copyPassword() {
+        let pwEl = document.getElementById("password");
+        pwEl.removeAttribute("readonly");
+        pwEl.select();
+        document.execCommand("copy");
+        pwEl.setAttribute("readonly", true);
+        showFeedback("Copied to clipboard!", true);
+      }
+    </script>
+  </body>
+</html>
