@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>e2zee - Custom Password Generator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -16,20 +17,26 @@
       nav {
         background: #254185;
         padding: 1em 0;
+        position: relative;
       }
       .nav-content {
-        max-width: 1100px;
+        max-width: 100%;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 1em;
+        position: relative;
       }
       .site-title {
         color: #fff;
-        font-size: 1.3em;
+        font-size: 2em;
         font-weight: bold;
         letter-spacing: 1px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
       }
       .nav-links a {
         color: #fff;
@@ -41,17 +48,52 @@
       .nav-links a:hover {
         opacity: 0.7;
       }
-      @media (max-width: 560px) {
+      .hamburger {
+        display: none;
+        font-size: 1.5em;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 0.2em 0.2em 0.2em 0.2em;
+      }
+      @media (max-width: 625px) {
+        h1 {
+          font-size: 1.5em;
+        }
+        nav {
+          padding: 0.5em;
+        }
         .nav-content {
-          flex-direction: column;
-          align-items: stretch;
+          flex-direction: row;
+          align-items: center;
+          padding: 0;
+          padding-left: 0.5em;
         }
         .site-title {
-          margin-bottom: 0.7em;
+          margin-bottom: 0;
+        }
+        .hamburger {
+          display: block;
+          z-index: 1001; /* ensure on top */
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          background: #254185;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 1em 0;
+        }
+        .nav-links.show {
+          display: flex;
         }
         .nav-links a {
-          margin-left: 0;
-          margin-right: 1em;
+          margin: 1em 0;
+          padding: 0.7em 2em;
         }
       }
       .container {
@@ -71,7 +113,7 @@
       select {
         width: 97%;
         padding: 0.6em;
-        margin-bottom: 0.6em;
+        margin-bottom: 0.3em;
         border-radius: 4px;
         border: 1px solid #ccc;
       }
@@ -119,6 +161,7 @@
         padding: 1em;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
       footer a {
         text-decoration: none;
@@ -168,7 +211,10 @@
     <nav>
       <div class="nav-content">
         <span class="site-title">e2zee</span>
-        <div class="nav-links">
+        <button class="hamburger" onclick="toggleNav()" aria-label="Menu">
+          &#9776;
+        </button>
+        <div class="nav-links" id="navLinks">
           <a href="index.html">Home</a>
           <a href="disclaimer.html">Disclaimer</a>
           <a href="terms.html">Terms & Conditions</a>
@@ -230,7 +276,10 @@
       </div>
     </div>
     <footer>
-      <div>Copyright &copy; 2025 e2zee. All rights reserved.</div>
+      <div>
+        Copyright &copy; 2025 <a style="margin: 0" href="index.html">e2zee</a>.
+        All rights reserved.
+      </div>
       <div>
         <a href="index.html">Home</a>
         <a href="disclaimer.html">Disclaimer</a>
@@ -241,6 +290,25 @@
       </div>
     </footer>
     <script>
+      // Hamburger functionality
+      function toggleNav() {
+        var nav = document.getElementById("navLinks");
+        nav.classList.toggle("show");
+      }
+
+      // Optional: close menu when clicking a link (for better UX on mobile)
+      document.addEventListener("DOMContentLoaded", function () {
+        var navLinks = document.querySelectorAll(".nav-links a");
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            var nav = document.getElementById("navLinks");
+            if (window.innerWidth <= 625) {
+              nav.classList.remove("show");
+            }
+          });
+        });
+      });
+
       function randomSymbol() {
         const symbols = "!@#$%^&*_";
         return symbols[Math.floor(Math.random() * symbols.length)];
