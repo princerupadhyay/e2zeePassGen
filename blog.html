@@ -5,126 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>e2zee Blog</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f6f8fa;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      nav {
-        background: #254185;
-        padding: 1em 0;
-      }
-      .nav-content {
-        max-width: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1em;
-        position: relative;
-      }
-      .site-title {
-        color: #fff;
-        font-size: 2em;
-        font-weight: bold;
-        letter-spacing: 1px;
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-      }
-      .nav-links a {
-        color: #fff;
-        margin-left: 1.3em;
-        text-decoration: none;
-        font-weight: 500;
-        transition: opacity 0.2s;
-      }
-      .nav-links a:hover {
-        opacity: 0.7;
-      }
-      .hamburger {
-        display: none;
-        font-size: 1.5em;
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        padding: 0.2em 0.2em 0.2em 0.2em;
-      }
-      @media (max-width: 625px) {
-        nav {
-          padding: 0.5em;
-        }
-        .nav-content {
-          flex-direction: row;
-          align-items: center;
-          padding: 0.5em;
-        }
-        .site-title {
-          margin-bottom: 0;
-        }
-        .hamburger {
-          display: block;
-          z-index: 1001;
-        }
-        .nav-links {
-          display: none;
-          flex-direction: column;
-          background: #254185;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          padding: 1em 0;
-        }
-        .nav-links.show {
-          display: flex;
-        }
-        .nav-links a {
-          margin: 1em 0;
-          padding: 0.7em 2em;
-        }
-      }
       .blog-container {
-        max-width: 700px;
-        margin: 2em auto;
+        max-width: 800px;
+        margin: 1em auto;
         background: #fff;
         border-radius: 8px;
         box-shadow: 0 2px 10px #0001;
         padding: 2em;
       }
-      .blog-title {
+      .blog-title h1 {
         text-align: center;
-        margin-bottom: 2em;
+        background-color: hsl(223, 56%, 33%);
+        color: white;
+        border-radius: 7px;
+        padding: 0.25em;
       }
       .blog-list {
         list-style: none;
         padding: 0;
         margin: 0;
       }
+
       .blog-post {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.3em;
         border-bottom: 1px solid #eee;
         padding: 1.5em 0;
       }
       .blog-post:last-child {
         border: none;
       }
-      .post-title {
-        font-size: 1.23em;
+      .blog-thumb-link {
+        display: block;
+        flex-shrink: 0;
+      }
+      .list-thumbnail {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 7px;
+        background: #eee;
+        margin-bottom: 0;
+        display: block;
+      }
+      .blog-post-content {
+        flex: 1;
+        min-width: 0;
+      }
+      .blog-post-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1em;
+        flex-wrap: wrap;
+      }
+      .post-title-link {
+        font-size: 1.8em;
         color: #254185;
         margin: 0 0 0.3em 0;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s;
       }
-      .post-date {
+      .post-title-link:hover {
+        color: #2d77d9;
+      }
+      .post-meta {
         color: #555;
         font-size: 0.95em;
-        margin-bottom: 0.8em;
-        display: block;
+        margin-bottom: 0.6em;
+      }
+      .post-meta .author {
+        margin-left: 0.5em;
+        font-weight: 500;
+        color: #555;
+      }
+      .post-meta .date {
+        font-weight: 500;
+        color: #555;
       }
       .post-excerpt {
         color: #222;
@@ -145,117 +105,114 @@
       .read-more-btn:hover {
         background: #2d77d9;
       }
-      footer {
-        margin-top: auto;
-        text-align: center;
-        background: #eee;
-        padding: 1em;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      @media (max-width: 600px) {
+
+      @media (max-width: 625px) {
+        .blog-title h1 {
+          text-align: center;
+          font-size: 1.5em;
+          color: white;
+          border-radius: 7px;
+          padding: 0.25em;
+        }
         .blog-container {
           padding: 1em;
-          margin: 1em 0.5em;
+          margin: 1em 1em;
         }
-        footer {
+        .blog-post {
           flex-direction: column;
+          align-items: stretch;
+          gap: 0.7em;
+        }
+        .list-thumbnail {
+          width: 100%;
+          max-height: 200px;
+          margin: 0 0 0.7em 0;
+        }
+        .blog-post-header {
+          flex-direction: column;
+          gap: 0.2em;
+        }
+        .post-meta .author {
+          margin-left: 0;
         }
       }
     </style>
   </head>
   <body>
-    <nav>
-      <div class="nav-content">
-        <span class="site-title">e2zee</span>
-        <button class="hamburger" onclick="toggleNav()" aria-label="Menu">
-          &#9776;
-        </button>
-        <div class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="blog.html">Blog</a>
-          <a href="disclaimer.html">Disclaimer</a>
-          <a href="terms.html">Terms & Conditions</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="about.html">About Us</a>
-          <a href="contact.html">Contact Us</a>
-        </div>
-      </div>
-    </nav>
-
+    <div id="site-header"></div>
     <div class="blog-container">
       <div class="blog-title">
-        <h1>e2zee Blog</h1>
-        <p>Read the latest updates, security advice, and announcements.</p>
+        <h1>Recent Posts</h1>
       </div>
       <ul class="blog-list">
         <li class="blog-post">
-          <div class="post-title">Why Use a Custom Password Generator?</div>
-          <span class="post-date">2024-06-09</span>
-          <div class="post-excerpt">
-            Learn how using a personal password generator improves your security
-            and peace of mind compared to generic solutions or browser-suggested
-            passwords.
+          <a
+            href="/blog/8-best-ways-to-store-passwords-safely-in-2025.html"
+            class="blog-thumb-link"
+          >
+            <img
+              src="blog/images/8-best-ways-to-store-passwords-safely-in-2025.jpg"
+              alt="8 Best Ways to Store Passwords Safely in 2025 - e2zee"
+              class="list-thumbnail"
+            />
+          </a>
+          <div class="blog-post-content">
+            <div class="blog-post-header">
+              <a
+                href="/blog/8-best-ways-to-store-passwords-safely-in-2025.html"
+                class="post-title-link"
+                >8 Best Ways to Store Passwords Safely in 2025 - e2zee</a
+              >
+            </div>
+            <div class="post-meta">
+              <span class="date">2025-06-09</span>
+              <span class="author"> - Prince Upadhyay</span>
+            </div>
+            <div class="post-excerpt">
+              Learn the safest and most practical ways to store your passwords.
+              Protect your online identity with these easy, reliable password
+              storage techniques.
+            </div>
+            <a
+              href="/blog/8-best-ways-to-store-passwords-safely-in-2025.html"
+              class="read-more-btn"
+              >Read More >></a
+            >
           </div>
-          <a href="post1.html" class="read-more-btn">Read More</a>
-        </li>
-        <li class="blog-post">
-          <div class="post-title">
-            10 Password Security Tips Everyone Should Know
-          </div>
-          <span class="post-date">2024-06-01</span>
-          <div class="post-excerpt">
-            We share our favorite tips to help you make—and keep—your passwords
-            truly secure, including password manager strategies and more.
-          </div>
-          <a href="post2.html" class="read-more-btn">Read More</a>
-        </li>
-        <li class="blog-post">
-          <div class="post-title">Announcing Our New Features!</div>
-          <span class="post-date">2024-05-29</span>
-          <div class="post-excerpt">
-            We're excited to introduce a stronger strength meter, better mobile
-            experience, and improved privacy settings for our users.
-          </div>
-          <a href="post3.html" class="read-more-btn">Read More</a>
         </li>
       </ul>
     </div>
-
-    <footer>
-      <div>
-        Copyright &copy; 2025 <a style="margin: 0" href="index.html">e2zee</a>.
-        All rights reserved.
-      </div>
-      <div>
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="disclaimer.html">Disclaimer</a>
-        <a href="terms.html">Terms & Conditions</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
     <script>
-      // Hamburger functionality
-      function toggleNav() {
-        var nav = document.getElementById("navLinks");
-        nav.classList.toggle("show");
+      function includeHTML(id, url, callback) {
+        fetch(url)
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById(id).innerHTML = html;
+            if (callback) callback();
+          });
       }
-      // Optional: close menu when clicking a link (for better UX on mobile)
-      document.addEventListener("DOMContentLoaded", function () {
-        var navLinks = document.querySelectorAll(".nav-links a");
-        navLinks.forEach(function (link) {
+      includeHTML("site-header", "header.html", function () {
+        // Wait for header to be included before attaching handlers
+        window.toggleNav = function () {
+          var nav = document.getElementById("navLinks");
+          var burger = document.getElementById("hamburgerBtn");
+          nav.classList.toggle("show");
+          burger.classList.toggle("active");
+        };
+        // Nav links close navigation on click (on mobile)
+        document.querySelectorAll(".nav-links a").forEach(function (link) {
           link.addEventListener("click", function () {
             var nav = document.getElementById("navLinks");
+            var burger = document.getElementById("hamburgerBtn");
             if (window.innerWidth <= 625) {
               nav.classList.remove("show");
+              burger.classList.remove("active");
             }
           });
         });
       });
+      includeHTML("site-footer", "footer.html");
     </script>
   </body>
 </html>

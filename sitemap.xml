@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.e2zee.xyz/</loc>
+    <loc>https://www.e2zee.xyz</loc>
+    <lastmod>2025-06-09T00:00:00Z</lastmod>
   </url>
   <url>
-    <loc>https://www.e2zee.xyz/about.html</loc>
-  </url>
-  <url>
-    <loc>https://www.e2zee.xyz/privacy.html</loc>
-  </url>
-  <url>
-    <loc>https://www.e2zee.xyz/contact.html</loc>
-  </url>
-  <url>
-    <loc>https://www.e2zee.xyz/terms.html</loc>
-  </url>
-  <url>
-    <loc>https://www.e2zee.xyz/disclaimer.html</loc>
+    <loc>https://www.e2zee.xyz/blog/8-best-ways-to-store-passwords-safely-in-2025.html</loc>
+    <lastmod>2025-06-09T00:00:00Z</lastmod>
   </url>
 </urlset>

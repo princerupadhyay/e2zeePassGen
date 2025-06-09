@@ -5,225 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>e2zee - Custom Password Generator</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f6f8fa;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
-      nav {
-        background: #254185;
-        padding: 1em 0;
-        position: relative;
-      }
-      .nav-content {
-        max-width: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1em;
-        position: relative;
-      }
-      .site-title {
-        color: #fff;
-        font-size: 2em;
-        font-weight: bold;
-        letter-spacing: 1px;
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-      }
-      .nav-links a {
-        color: #fff;
-        margin-left: 1.3em;
-        text-decoration: none;
-        font-weight: 500;
-        transition: opacity 0.2s;
-      }
-      .nav-links a:hover {
-        opacity: 0.7;
-      }
-      .hamburger {
-        display: none;
-        font-size: 1.5em;
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        padding: 0.2em 0.2em 0.2em 0.2em;
-      }
-      @media (max-width: 625px) {
-        h1 {
-          font-size: 1.5em;
-        }
-        nav {
-          padding: 0.5em;
-        }
-        .nav-content {
-          flex-direction: row;
-          align-items: center;
-          padding: 0;
-          padding-left: 0.5em;
-        }
-        .site-title {
-          margin-bottom: 0;
-        }
-        .hamburger {
-          display: block;
-          z-index: 1001; /* ensure on top */
-        }
-        .nav-links {
-          display: none;
-          flex-direction: column;
-          background: #254185;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          padding: 1em 0;
-        }
-        .nav-links.show {
-          display: flex;
-        }
-        .nav-links a {
-          margin: 1em 0;
-          padding: 0.7em 2em;
-        }
-      }
-      .container {
-        max-width: 600px;
-        margin: 1em 1em;
-        background: #fff;
-        padding: 2em;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px #0002;
-      }
-      label {
-        display: block;
-        margin: 1em 0 0.2em 0;
-        font-weight: bold;
-      }
-      input,
-      select {
-        width: 97%;
-        padding: 0.6em;
-        margin-bottom: 0.3em;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-      }
-      #password {
-        width: 100%;
-        padding: 0.6em;
-        font-size: 1.2em;
-        margin: 0;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-      }
-      .row {
-        display: flex;
-        align-items: center;
-      }
-      .row button {
-        margin-left: 0.5em;
-        height: 2.9em;
-      }
-      .row_btn {
-        display: flex;
-        gap: 0.25px;
-      }
-      .feedback {
-        font-size: 1em;
-        margin-bottom: 1em;
-        font-weight: bolder;
-        display: none;
-      }
-      .strength-bar {
-        height: 10px;
-        border-radius: 4px;
-        width: 100%;
-        background: #eee;
-        margin-bottom: 0.7em;
-      }
-      .strength-line {
-        height: 100%;
-        border-radius: 4px;
-        transition: width 0.2s;
-      }
-      footer {
-        text-align: center;
-        background: #eee;
-        padding: 1em;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      footer a {
-        text-decoration: none;
-        margin-right: 0.5em;
-      }
-      button {
-        padding: 0.5em 0.5em;
-        font-size: 1em;
-      }
-      .size-wrap {
-        display: flex;
-        gap: 1em;
-      }
-      .size-wrap input {
-        width: 5em;
-        margin-bottom: 0;
-      }
-      @media (max-width: 600px) {
-        .container {
-          margin: 1em 1em;
-        }
-        .size-wrap {
-          flex-direction: column;
-          gap: 0;
-        }
-        footer {
-          flex-direction: column;
-        }
-        footer div {
-          margin-bottom: 0.3em;
-        }
-        .row {
-          flex-direction: column;
-        }
-        .row_btn {
-          margin-top: 1em;
-          display: flex;
-          gap: 10px;
-        }
-        .row_btn button {
-          margin: 0;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav>
-      <div class="nav-content">
-        <span class="site-title">e2zee</span>
-        <button class="hamburger" onclick="toggleNav()" aria-label="Menu">
-          &#9776;
-        </button>
-        <div class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="disclaimer.html">Disclaimer</a>
-          <a href="terms.html">Terms & Conditions</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="about.html">About Us</a>
-          <a href="contact.html">Contact Us</a>
-        </div>
-      </div>
-    </nav>
+    <div id="site-header"></div>
     <div style="display: flex; justify-content: center">
       <div class="container">
         <h1>Custom Password Generator</h1>
@@ -249,12 +34,12 @@
           <label>Secret Word (required):</label>
           <input type="text" id="customWord" maxlength="30" required />
           <div class="size-wrap">
-            <label
-              >Min Length:
+            <label>
+              Min Length:
               <input type="number" id="minLen" min="6" max="50" value="12" />
             </label>
-            <label
-              >Max Length:
+            <label>
+              Max Length:
               <input type="number" id="maxLen" min="8" max="64" value="20" />
             </label>
           </div>
@@ -275,40 +60,8 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div>
-        Copyright &copy; 2025 <a style="margin: 0" href="index.html">e2zee</a>.
-        All rights reserved.
-      </div>
-      <div>
-        <a href="index.html">Home</a>
-        <a href="disclaimer.html">Disclaimer</a>
-        <a href="terms.html">Terms & Conditions</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
     <script>
-      // Hamburger functionality
-      function toggleNav() {
-        var nav = document.getElementById("navLinks");
-        nav.classList.toggle("show");
-      }
-
-      // Optional: close menu when clicking a link (for better UX on mobile)
-      document.addEventListener("DOMContentLoaded", function () {
-        var navLinks = document.querySelectorAll(".nav-links a");
-        navLinks.forEach(function (link) {
-          link.addEventListener("click", function () {
-            var nav = document.getElementById("navLinks");
-            if (window.innerWidth <= 625) {
-              nav.classList.remove("show");
-            }
-          });
-        });
-      });
-
       function randomSymbol() {
         const symbols = "!@#$%^&*_";
         return symbols[Math.floor(Math.random() * symbols.length)];
@@ -316,7 +69,6 @@
       function randomDigit() {
         return String(Math.floor(Math.random() * 10));
       }
-
       function generatePassword() {
         const fn = document.getElementById("firstName").value.trim();
         const sn = document.getElementById("surname").value.trim();
@@ -324,7 +76,6 @@
         const phone = document.getElementById("phone").value.replace(/\D/g, "");
         const lucky = document.getElementById("lucky").value.trim();
         const custom = document.getElementById("customWord").value.trim();
-
         const minLen = Math.max(
           6,
           parseInt(document.getElementById("minLen").value) || 12
@@ -333,14 +84,12 @@
           minLen,
           parseInt(document.getElementById("maxLen").value) || minLen + 2
         );
-
         if (!custom) {
           showFeedback('Please enter the "Secret Word"', false);
           showStrength("");
           document.getElementById("password").value = "";
           return;
         }
-
         // Prepare components, as entered
         let year = "",
           month = "",
@@ -351,7 +100,6 @@
           month = String(d.getMonth() + 1).padStart(2, "0");
           day = String(d.getDate()).padStart(2, "0");
         }
-
         const usableParts = [
           fn,
           sn,
@@ -361,7 +109,6 @@
           day,
           phone ? phone.slice(-4) : "",
         ].filter(Boolean);
-
         // Shuffle for randomness, pick a random N (at least 1) parts to use
         let shuffled = usableParts.sort(() => Math.random() - 0.5);
         let numParts = Math.min(
@@ -369,23 +116,18 @@
           Math.max(1, Math.floor(Math.random() * shuffled.length) + 1)
         );
         let pickedParts = shuffled.slice(0, numParts);
-
         // Always insert secret word at a random position
         let idx = Math.floor(Math.random() * (pickedParts.length + 1));
         pickedParts.splice(idx, 0, custom);
-
         // Join with a symbol as separator (randomly)
         let sepChance = Math.random();
         let sep = sepChance > 0.6 ? randomSymbol() : "";
         let base = pickedParts.join(sep);
-
         // Optionally symbol at very start or at end to increase strength
         if (Math.random() > 0.5) base += randomSymbol();
         if (Math.random() > 0.7) base = randomSymbol() + base;
-
         // Fit to desired size
         let password = base;
-        // If too short, repeat pieces or add random digits/symbols to reach minLen
         while (password.length < minLen) {
           let fillers = [
             randomDigit(),
@@ -394,16 +136,12 @@
           ];
           password += fillers[Math.floor(Math.random() * fillers.length)];
         }
-        // If too long, shave off
         if (password.length > maxLen) password = password.substring(0, maxLen);
-
         document.getElementById("password").value = password;
         document.getElementById("password").setAttribute("readonly", true);
-
         showStrength(password);
         showFeedback("Password generated! Edit or copy as you like.", true);
       }
-
       function showStrength(pwd) {
         let score = 0;
         if (pwd.length >= 12) score++;
@@ -418,8 +156,6 @@
         let words = ["Very Weak", "Weak", "Fair", "Strong", "Excellent"][score];
         document.getElementById("strengthLine").style.width = width + "%";
         document.getElementById("strengthLine").style.background = color;
-
-        // Show as feedback only if password is not empty
         const msg =
           pwd && pwd.length > 0
             ? "Strength: " + words + " (" + pwd.length + " chars)"
@@ -430,7 +166,6 @@
         const el = document.getElementById("feedback");
         el.textContent = msg;
         el.style.color = ok ? "#27ae60" : "#c0392b";
-        // Show only if msg is not empty, else hide
         if (msg && msg.trim() !== "") {
           el.style.display = "block";
         } else {
@@ -452,7 +187,6 @@
       document
         .getElementById("password")
         .addEventListener("input", onPasswordEdit);
-
       function copyPassword() {
         let pwEl = document.getElementById("password");
         pwEl.removeAttribute("readonly");
@@ -461,6 +195,39 @@
         pwEl.setAttribute("readonly", true);
         showFeedback("Copied to clipboard!", true);
       }
+    </script>
+
+    <!-- Header/Footer Dynamic Includes -->
+    <script>
+      function includeHTML(id, url, callback) {
+        fetch(url)
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById(id).innerHTML = html;
+            if (callback) callback();
+          });
+      }
+      includeHTML("site-header", "header.html", function () {
+        // Wait for header to be included before attaching handlers
+        window.toggleNav = function () {
+          var nav = document.getElementById("navLinks");
+          var burger = document.getElementById("hamburgerBtn");
+          nav.classList.toggle("show");
+          burger.classList.toggle("active");
+        };
+        // Nav links close navigation on click (on mobile)
+        document.querySelectorAll(".nav-links a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            var nav = document.getElementById("navLinks");
+            var burger = document.getElementById("hamburgerBtn");
+            if (window.innerWidth <= 625) {
+              nav.classList.remove("show");
+              burger.classList.remove("active");
+            }
+          });
+        });
+      });
+      includeHTML("site-footer", "footer.html");
     </script>
   </body>
 </html>
