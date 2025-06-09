@@ -6,7 +6,7 @@
     <title>e2zee Blog – Password Security, Tech Tips & Digital Safety</title>
     <meta
       name="title"
-      content="e2zee Blog – Password Security, Tech Tips & Digital Safety"
+      content="e2zeeBlog – Password Security, Tech Tips & Digital Safety"
     />
     <meta
       name="description"
@@ -219,15 +219,15 @@
             if (callback) callback();
           });
       }
+
       includeHTML("site-header", "header.html", function () {
-        // Wait for header to be included before attaching handlers
+        // Hamburger menu setup
         window.toggleNav = function () {
           var nav = document.getElementById("navLinks");
           var burger = document.getElementById("hamburgerBtn");
           nav.classList.toggle("show");
           burger.classList.toggle("active");
         };
-        // Nav links close navigation on click (on mobile)
         document.querySelectorAll(".nav-links a").forEach(function (link) {
           link.addEventListener("click", function () {
             var nav = document.getElementById("navLinks");
@@ -238,7 +238,18 @@
             }
           });
         });
+
+        // Site title swap (do this **after** nav is inserted!)
+        var titleElement = document.getElementById("siteTitle");
+        if (titleElement) {
+          if (window.location.pathname.includes("blog")) {
+            titleElement.textContent = "e2zeeBlog";
+          } else {
+            titleElement.textContent = "e2zee";
+          }
+        }
       });
+
       includeHTML("site-footer", "footer.html");
     </script>
   </body>
