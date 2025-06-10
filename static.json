@@ -1,0 +1,8 @@
+{
+  "routes": {
+    "/sitemap.xml": "sitemap.xml",
+    "/robots.txt": "robots.txt",
+    "/favicon.ico": "favicon.ico",
+    "/**": "index.html"
+  }
+}
