@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>e2zee - Custom Password Generator (2025)</title>
-    <meta name="title" content="e2zee - Custom Password Generator" />
+    <title>
+      e2zee - Technical Tips, Android Gaming & Practical Tricks (2025)
+    </title>
+    <meta
+      name="title"
+      content="e2zee - Technical Tips, Android Gaming & Practical Tricks"
+    />
     <meta
       name="description"
-      content="Use e2zee's free online custom password generator to create strong, memorable, and unique passwords based on your info. Secure your accounts quickly and easily!"
+      content="Welcome to e2zee! Your go-to place for easy tech tips, Android gaming guides, and practical tricks to solve everyday tech problems. Stay updated with fresh content."
     />
 
     <meta
@@ -19,211 +24,205 @@
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
 
-    <!-- Canonical URL (recommended if your site could be accessed at multiple URLs) -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://www.e2zee.xyz/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.e2zee.xyz/" />
-    <meta property="og:title" content="e2zee - Custom Password Generator" />
+    <meta
+      property="og:title"
+      content="e2zee - Technical Tips, Android Gaming & Practical Tricks"
+    />
     <meta
       property="og:description"
-      content="Create strong, memorable passwords with e2zee's custom password generator. Fast, secure, and free for everyone."
+      content="Welcome to e2zee! Your go-to place for easy tech tips, Android gaming guides, and practical tricks to solve everyday tech problems. Stay updated with fresh content."
     />
+
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .blog-container {
+        max-width: 800px;
+        margin: 1em auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px #0001;
+        padding: 2em;
+      }
+      h1 {
+        margin: 0;
+      }
+      .blog-title h1 {
+        text-align: center;
+        background-color: hsl(223, 56%, 33%);
+        color: white;
+        border-radius: 7px;
+        padding: 0.25em;
+      }
+      .blog-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .blog-post {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.3em;
+        border-bottom: 1px solid #eee;
+        padding: 1em 0;
+      }
+      .blog-post:last-child {
+        border: none;
+      }
+      .blog-thumb-link {
+        display: block;
+        flex-shrink: 0;
+      }
+      .list-thumbnail {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 7px;
+        background: #eee;
+        margin-bottom: 0;
+        display: block;
+      }
+      .blog-post-content {
+        flex: 1;
+        min-width: 0;
+      }
+      .blog-post-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1em;
+        flex-wrap: wrap;
+      }
+      .post-title-link {
+        font-size: 1.8em;
+        color: #254185;
+        margin: 0 0 0.3em 0;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.2s;
+      }
+      .post-title-link:hover {
+        color: #2d77d9;
+      }
+      .post-meta {
+        color: #555;
+        font-size: 0.95em;
+        margin-bottom: 0.6em;
+      }
+      .post-meta .author {
+        margin-left: 0.5em;
+        font-weight: 500;
+        color: #555;
+      }
+      .post-meta .date {
+        font-weight: 500;
+        color: #555;
+      }
+      .post-excerpt {
+        color: #222;
+        margin-bottom: 0.7em;
+      }
+      .read-more-btn {
+        display: inline-block;
+        padding: 0.35em 1.1em;
+        background: #254185;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 1em;
+        transition: background 0.18s;
+        margin-bottom: 0.5em;
+      }
+      .read-more-btn:hover {
+        background: #2d77d9;
+      }
+
+      @media (max-width: 625px) {
+        .blog-title h1 {
+          text-align: center;
+          font-size: 1.5em;
+          color: white;
+          border-radius: 7px;
+          padding: 0.25em;
+        }
+        .blog-container {
+          padding: 1em;
+          margin: 1em 1em;
+        }
+        .blog-post {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.7em;
+        }
+        .list-thumbnail {
+          width: 100%;
+          max-height: 200px;
+          margin: 0 0 0.7em 0;
+        }
+        .blog-post-header {
+          flex-direction: column;
+          gap: 0.2em;
+        }
+        .post-meta .author {
+          margin-left: 0;
+        }
+      }
+    </style>
   </head>
+
   <body>
     <div id="site-header"></div>
-    <div style="display: flex; justify-content: center">
-      <div class="container">
-        <h1>Custom Password Generator</h1>
-        <p>
-          Create a strong, memorable password. Every click gives you a new
-          variation from your info, sized how you want.
-        </p>
-        <form
-          id="pwForm"
-          autocomplete="off"
-          onsubmit="generatePassword(); return false;"
-        >
-          <label>First Name:</label>
-          <input type="text" id="firstName" maxlength="30" />
-          <label>Last Name:</label>
-          <input type="text" id="surname" maxlength="30" />
-          <label>Date of Birth:</label>
-          <input type="date" id="dob" />
-          <label>Phone Number (optional):</label>
-          <input type="tel" id="phone" maxlength="16" />
-          <label>Lucky Number (optional):</label>
-          <input type="number" id="lucky" min="0" max="9999" />
-          <label>Secret Word (required):</label>
-          <input type="text" id="customWord" maxlength="30" required />
-          <div class="size-wrap">
-            <label>
-              Min Length:
-              <input type="number" id="minLen" min="6" max="50" value="12" />
-            </label>
-            <label>
-              Max Length:
-              <input type="number" id="maxLen" min="8" max="64" value="20" />
-            </label>
-          </div>
-          <button style="margin-top: 1em; margin-bottom: 1em" type="submit">
-            Generate Password
-          </button>
-        </form>
-        <div class="feedback" id="feedback"></div>
-        <div class="strength-bar">
-          <div class="strength-line" id="strengthLine"></div>
-        </div>
-        <div class="row">
-          <input type="text" id="password" readonly />
-          <div class="row_btn">
-            <button type="button" onclick="copyPassword()">Copy</button>
-            <button type="button" onclick="editPassword()">Edit</button>
-          </div>
-        </div>
+    <div class="blog-container">
+      <div class="blog-title">
+        <h1>Recent Posts</h1>
       </div>
+      <ul class="blog-list">
+        <li class="blog-post">
+          <a
+            href="/top-5-low-mb-racing-games-for-android-in-2025-e2zee.html"
+            class="blog-thumb-link"
+          >
+            <img
+              src="images/top-5-low-mb-racing-games-for-android-in-2025-e2zee.jpg"
+              alt="Top 5 Low MB Racing Games for Android in 2025 - e2zee"
+              class="list-thumbnail"
+            />
+          </a>
+          <div class="blog-post-content">
+            <div class="blog-post-header">
+              <a
+                href="/top-5-low-mb-racing-games-for-android-in-2025-e2zee.html"
+                class="post-title-link"
+                >Top 5 Low MB Racing Games for Android in 2025 - e2zee</a
+              >
+            </div>
+            <div class="post-meta">
+              <span class="date">2025-06-10</span>
+              <span class="author"> - Prince Upadhyay</span>
+            </div>
+            <div class="post-excerpt">
+              Discover the best low MB racing games for Android in 2025. Enjoy
+              fun, lightweight games that won’t take much storage but will give
+              you hours of excitement.
+            </div>
+            <a
+              href="/top-5-low-mb-racing-games-for-android-in-2025-e2zee.html"
+              class="read-more-btn"
+              >Read More >></a
+            >
+          </div>
+        </li>
+      </ul>
     </div>
     <div id="site-footer"></div>
-    <script>
-      function randomSymbol() {
-        const symbols = "!@#$%^&*_";
-        return symbols[Math.floor(Math.random() * symbols.length)];
-      }
-      function randomDigit() {
-        return String(Math.floor(Math.random() * 10));
-      }
-      function generatePassword() {
-        const fn = document.getElementById("firstName").value.trim();
-        const sn = document.getElementById("surname").value.trim();
-        const dob = document.getElementById("dob").value;
-        const phone = document.getElementById("phone").value.replace(/\D/g, "");
-        const lucky = document.getElementById("lucky").value.trim();
-        const custom = document.getElementById("customWord").value.trim();
-        const minLen = Math.max(
-          6,
-          parseInt(document.getElementById("minLen").value) || 12
-        );
-        const maxLen = Math.max(
-          minLen,
-          parseInt(document.getElementById("maxLen").value) || minLen + 2
-        );
-        if (!custom) {
-          showFeedback('Please enter the "Secret Word"', false);
-          showStrength("");
-          document.getElementById("password").value = "";
-          return;
-        }
-        // Prepare components, as entered
-        let year = "",
-          month = "",
-          day = "";
-        if (dob) {
-          const d = new Date(dob);
-          year = `${d.getFullYear()}`;
-          month = String(d.getMonth() + 1).padStart(2, "0");
-          day = String(d.getDate()).padStart(2, "0");
-        }
-        const usableParts = [
-          fn,
-          sn,
-          lucky,
-          year,
-          month,
-          day,
-          phone ? phone.slice(-4) : "",
-        ].filter(Boolean);
-        // Shuffle for randomness, pick a random N (at least 1) parts to use
-        let shuffled = usableParts.sort(() => Math.random() - 0.5);
-        let numParts = Math.min(
-          shuffled.length,
-          Math.max(1, Math.floor(Math.random() * shuffled.length) + 1)
-        );
-        let pickedParts = shuffled.slice(0, numParts);
-        // Always insert secret word at a random position
-        let idx = Math.floor(Math.random() * (pickedParts.length + 1));
-        pickedParts.splice(idx, 0, custom);
-        // Join with a symbol as separator (randomly)
-        let sepChance = Math.random();
-        let sep = sepChance > 0.6 ? randomSymbol() : "";
-        let base = pickedParts.join(sep);
-        // Optionally symbol at very start or at end to increase strength
-        if (Math.random() > 0.5) base += randomSymbol();
-        if (Math.random() > 0.7) base = randomSymbol() + base;
-        // Fit to desired size
-        let password = base;
-        while (password.length < minLen) {
-          let fillers = [
-            randomDigit(),
-            randomSymbol(),
-            pickedParts[Math.floor(Math.random() * pickedParts.length)] || "",
-          ];
-          password += fillers[Math.floor(Math.random() * fillers.length)];
-        }
-        if (password.length > maxLen) password = password.substring(0, maxLen);
-        document.getElementById("password").value = password;
-        document.getElementById("password").setAttribute("readonly", true);
-        showStrength(password);
-        showFeedback("Password generated! Edit or copy as you like.", true);
-      }
-      function showStrength(pwd) {
-        let score = 0;
-        if (pwd.length >= 12) score++;
-        if (/[A-Z]/.test(pwd) && /[a-z]/.test(pwd)) score++;
-        if (/\d/.test(pwd)) score++;
-        if (/[^A-Za-z0-9]/.test(pwd)) score++;
-        if (pwd.length >= 16) score++;
-        let width = [10, 35, 60, 80, 100][score];
-        let color = ["#bb2222", "#e67e22", "#f4d03f", "#4a90e2", "#27ae60"][
-          score
-        ];
-        let words = ["Very Weak", "Weak", "Fair", "Strong", "Excellent"][score];
-        document.getElementById("strengthLine").style.width = width + "%";
-        document.getElementById("strengthLine").style.background = color;
-        const msg =
-          pwd && pwd.length > 0
-            ? "Strength: " + words + " (" + pwd.length + " chars)"
-            : "";
-        showFeedback(msg, pwd && score > 1);
-      }
-      function showFeedback(msg, ok) {
-        const el = document.getElementById("feedback");
-        el.textContent = msg;
-        el.style.color = ok ? "#27ae60" : "#c0392b";
-        if (msg && msg.trim() !== "") {
-          el.style.display = "block";
-        } else {
-          el.style.display = "none";
-        }
-      }
-      function editPassword() {
-        document.getElementById("password").removeAttribute("readonly");
-        document.getElementById("password").focus();
-      }
-      function onPasswordEdit() {
-        let pwd = document.getElementById("password").value;
-        showStrength(pwd);
-        showFeedback(
-          "You are editing your password. Make sure it stays strong!",
-          true
-        );
-      }
-      document
-        .getElementById("password")
-        .addEventListener("input", onPasswordEdit);
-      function copyPassword() {
-        let pwEl = document.getElementById("password");
-        pwEl.removeAttribute("readonly");
-        pwEl.select();
-        document.execCommand("copy");
-        pwEl.setAttribute("readonly", true);
-        showFeedback("Copied to clipboard!", true);
-      }
-    </script>
-
-    <!-- Header/Footer Dynamic Includes -->
     <script>
       function includeHTML(id, url, callback) {
         fetch(url)
